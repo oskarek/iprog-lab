@@ -1,9 +1,12 @@
-body {
+html, body {
 	background: url("../images/people-eating.jpg") no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	min-width: 1000px;
+	width: auto !important;
+	width: 1000px;
 }
 
 .transbox {
@@ -42,4 +45,8 @@ body {
 	height:1px;
 	background:#717171;
 	border-bottom:1px solid #313030;
+}
+
+.horizontal {
+	display: inline-block;
 }

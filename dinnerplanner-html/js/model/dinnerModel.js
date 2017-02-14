@@ -1,7 +1,7 @@
 //DinnerModel Object constructor
 var DinnerModel = function() {
 
-  this.numberOfGuests = 0;
+  this.numberOfGuests = 1;
   this.menu = [];
 
   // Set the number of guests for the dinner to a given value
@@ -27,8 +27,24 @@ var DinnerModel = function() {
 
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
-    return this.numberOfGuests * getAllIngredients.reduce((a,b)=>a+b, 0);
+    return this.getPriceForIngredients(this.getAllIngredients());
   }
+
+  //Returns the price for a given dish
+  this.getTotalPriceForDish = function(dish) {
+    return this.getPriceForIngredients(dish.ingredients);
+  }
+
+  //Returns the price for a set of ingredients
+  this.getPriceForIngredients = function(ingredients) {
+    const priceOfIngredients = ingredients
+      .map(ingr=>ingr.price)
+      .reduce((a,b)=>a+b, 0);
+    return this.numberOfGuests * priceOfIngredients;
+  }
+
+  //Returns the ingredients for a dish
+  this.getIngredientsForDish = function(dish) { return dish.ingredients; }
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
@@ -70,6 +86,7 @@ var DinnerModel = function() {
 	//function that returns a dish of specific ID
 	this.getDish = function (id) { return dishes.find(dish => dish.id == id); }
 
+  this.getAllTypes = function () { return ["starter", "main dish", "dessert"]; }
 
 	// the dishes variable contains an array of all the
 	// dishes in the database. each dish has id, name, type,
